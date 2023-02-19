@@ -38,7 +38,7 @@ import net.starlark.java.eval.StarlarkValue;
  * 4.5.6} or {@code 5.0.1beta2}. Components must start with a non-negative integer and at least one
  * component must be present.
  *
- * <p>Specifically, the format of a component is {@code \d+([a-z0-9]*?)?(\d+)?}.
+ * <p>Specifically, the format of a component is {@code [a-z]*\d+([a-z0-9]*?)?(\d+)?[a-z]*}.
  *
  * <p>If this smells a lot like semver, it does, but Xcode versions are sometimes special. This is
  * why this class is in the {@code apple} package and has to remain as such.
@@ -149,11 +149,11 @@ public final class DottedVersion implements DottedVersionApi<DottedVersion> {
   }
   private static final Splitter DOT_SPLITTER = Splitter.on('.');
   private static final Pattern COMPONENT_PATTERN =
-      Pattern.compile("(\\d+)([a-z0-9]*?)?(\\d+)?", Pattern.CASE_INSENSITIVE);
+      Pattern.compile("[a-z]*(\\d+)([a-z0-9]*?)?(\\d+)?[a-z]*", Pattern.CASE_INSENSITIVE);
   private static final Pattern DESCRIPTIVE_COMPONENT_PATTERN =
       Pattern.compile("([a-z]\\w*)", Pattern.CASE_INSENSITIVE);
   private static final String ILLEGAL_VERSION =
-      "Dotted version components must all start with the form \\d+([a-z0-9]*?)?(\\d+)? "
+      "Dotted version components must all start with the form \\[a-z]*d+([a-z0-9]*?)?(\\d+)?[a-z]* "
           + "but got '%s'";
   private static final String NO_ALPHA_SEQUENCE = null;
   private static final Component ZERO_COMPONENT = new Component(0, NO_ALPHA_SEQUENCE, 0, "0");
