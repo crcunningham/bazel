@@ -1,3 +1,33 @@
+## Release 6.0.1 (2023-02-20)
+
+```
+Baseline: 8740816e96603750a562bdda2ec467febbf8fdaa
+```
+
+Incompatible changes:
+
+  - When remote cache evicts blobs, Bazel will exit with code 39.
+  - `--features` only applies to targets built in the target
+    configuration, and `--host_features` is used for the host / exec
+    configuration (gated behind `--incompatible_use_host_features`)
+
+Important changes:
+
+  - Update Android manifest merger to v30.1.3, and also drop support
+    for legacy (pre-D8) desugaring.
+  - Adds coverage metric support to android_local_test
+  - Correctly encode double value positive infinity as "inf" instead
+    of "+inf" for textprotos.
+  - Add --use_target_platform_for_tests which uses the target
+    platform for executing tests instead of the execution platform.
+  - Custom C++ rules on Windows calling
+    cc_common.create_linking_context_from_compilation_outputs should
+    review whether each target of the rule type should produce a
+    dynamic library since a condition which blocked their creation
+    has been moved to the rules from behind the API.
+
+This release contains contributions from many people at Google, as well as Andreas Herrmann, Austin Schuh, Benjamin Lee, Chris Cunningham, Daniel Grunwald, Emil Kattainen, Fabian Meumertzheim, Hao Yuan, Keith Smiley, Kun-Lu, Son Luong Ngoc, Ubuntu, hvd, keertk, kshyanashree, yuzhy8701.
+
 ## Release 7.0.0-pre.20230209.2 (2023-02-16)
 
 ```
